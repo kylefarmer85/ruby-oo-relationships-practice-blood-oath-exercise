@@ -69,9 +69,25 @@ class Cult
   end
 
   def self.most_common_location
-    location = Hash.new(0)
+    newhash = {}
     Cult.all.each do |cult|
-      if
+        if newhash[cult.location]
+            newhash[cult.location] += 1
+        else
+            newhash[cult.location] = 0
+            newhash[cult.location] += 1
+        end
+    end
+    big_location = 0
+    best_location = ""
+    newhash.each do |key, value|
+        if value > big_location || big_location == nil
+            big_location = value
+            best_location = key
+        end
+    end
+    best_location
+  end
 
 
 
